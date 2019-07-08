@@ -1,4 +1,15 @@
 import pandas as pd
+import numpy as np
+
+# Tools for recursive feature selection
+from sklearn.linear_model import LogisticRegression
+from sklearn.feature_selection import RFE
+
+# Tools for fitting logistic regression and getting p-values
+import statsmodels.api as sm
+
+# For plotting
+import matplotlib.pyplot as plt
 
 
 # Function to prepare called-pitches dataframe for modelling
@@ -40,3 +51,111 @@ def prepare_df(df):
     
     # Return X dataframe, y series
     return df.drop(labels=['strike_given_called'], axis=1), df['strike_given_called'] 
+
+
+
+
+
+### Function to rank features on significance
+#       uses recursive feature selection
+# Inputs:
+#   X - the input variable dataframe
+#   y - the response variable series
+#
+# Returns:
+#   ranked_features - a list of column names, in decreasing order of significance
+#                       omits intercept
+def rank_features (X, y):
+    # Fit logistic regression
+    rfe = RFE(LogisticRegression(solver="liblinear"),1).fit(X, y)
+
+    # Get ranked features
+    ranked_features = [X.columns.tolist()[np.where(rfe.ranking_ == i)[0][0]] for i in range(1,len(X.columns)+1)]
+
+    # Remove intercept
+    ranked_features.remove('intercept')
+
+    # Return list
+    return ranked_features
+
+
+
+
+
+### Function to calculate p-values and UPM coefficients for model as features are
+### removed one by one in order of increasing significance
+#
+# Inputs:
+#   X - the input variable dataframe
+#   y - the response variable series
+#   rf - a list of column names given in increasing significance of the features
+#
+# NOTE: This function anticipates UPM being included in the list of features
+#
+# Returns:
+#   n_features, beta, p
+#   n_features: a list of number-of-features corresponding to the number of features in each index of beta and p
+#   beta:   a list of UPM coefficients; beta[i] is the UPM coefficient n_features[i] number of features
+#   p:  a list of p-values for the UPM coefficients at the corresponding index
+def eliminate_features (X, y, ranked_features):
+    # Only care about the control features
+    rf = ranked_features.copy()
+    rf.remove('upm')
+
+    # Initialize lists for the algorithm
+    n_features = []
+    beta = []
+    p = []
+
+    # While the list of control features is non-empty
+    while (rf):
+        # Record number of features
+        n_features.append(len(rf) + 1)
+        print(f"Fitting {n_features[-1]} variables...")
+
+        # Fit logistic regression
+        fit = sm.Logit(y, X[['upm', 'intercept'] + rf]).fit()
+
+        # Record coefficient and p-value
+        beta.append(fit.params[0])
+        p.append(fit.pvalues[0])
+        print(f"Beta = {beta[-1]}; p = {p[-1]}")
+
+        # Remove least significant control from list
+        rf = rf[:-1]
+
+    return n_features, beta, p
+
+
+
+
+### Functions to make plotting betas and p-values shorted in notebook
+### Inputs:
+# beta or p: list of coefficients or p-values output by eliminate_features()
+# n_features: n_features output by eliminate_features()
+# title: Plot title
+# outfile: Name of output file to write plot to. File extension given determines format,
+#           since matplotlib.pyplot.savefig() is used.
+
+def plot_beta(beta, n_features, title, outfile):
+    plt.figure(figsize=(9,7))
+    plt.ylim(min(min(beta), 0), max(0,max(beta)))
+    plt.plot(n_features, beta)
+    plt.xlabel("Number of features")
+    plt.ylabel("UPM Coefficient")
+    plt.xticks(n_features)
+    plt.title(title)
+    plt.savefig(outfile)
+    plt.show()
+
+
+def plot_pvalues (p, n_features, title, outfile):
+    plt.figure(figsize=(9,7))
+    plt.ylim(0,1)
+    plt.plot(n_features, p)
+
+    plt.xlabel("Number of features")
+    plt.ylabel("UPM p-value")
+    plt.title(title)
+    plt.xticks(n_features)
+    plt.savefig(outfile)
