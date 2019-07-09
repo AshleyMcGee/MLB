@@ -159,3 +159,32 @@ def plot_pvalues (p, n_features, title, outfile):
     plt.title(title)
     plt.xticks(n_features)
     plt.savefig(outfile)
+
+
+# Function to find ∂y/∂x_upm for x_upm = 0, x_i = mean(x_i) for all i ≠ upm
+# Purpose is to describe the effect of the UPM coefficient in the logistic regression model
+# The formula in use below can be easily derived by taking the partial derivative of the sigmoid function
+#
+# Inputs:
+#   fit - a logistic regression fit by statsmodels.api.Logit(y, X).fit()
+#   X - the X dataframe of input variables used to make the corresponding fit
+#
+# Returns: the partial derivative of the sigmoid function with respect to the UPM indicator variable
+#   evaluated at x_UPM = 0, all other inputs set to their mean
+def upm_effects(fit, X):
+    # Find predicted value
+    pred = fit.predict([0] + X.mean()[1:].tolist())[0]
+    
+    return (fit.params[0]*(pred - pred**2))
+
+
+
+
+
+# Simple function for passing, to group racial categories into a binary:
+# White, or nonwhite
+def white_or_not(r):
+    if r == 'white':
+        return 'white'
+    else:
+        return 'nonwhite'
