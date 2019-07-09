@@ -7,15 +7,15 @@ We started with review of research done by Christopher A. Parsons, Johan Sulaema
 We pulled game data for 2013-2015 from https://www.baseball-reference.com
 
 We identified the urls for each game id
-*Loop through each game to pull
-*The home plate umpire name
-*The pitch sequence
-*The pitch count of balls and strike
-*The pitcher name
-*The batter name
-*Boolean of whether or not the pitcher is the ‘home’ pitcher
-*The inning
-*The run difference
+* Loop through each game to pull
+* The home plate umpire name
+* The pitch sequence
+* The pitch count of balls and strike
+* The pitcher name
+* The batter name
+* Boolean of whether or not the pitcher is the ‘home’ pitcher
+* The inning
+* The run difference
 
 We pulled 2014 player (pitcher) racial data from https://www.besttickets.com/blog/mlb-players-census/
 
