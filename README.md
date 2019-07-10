@@ -14,9 +14,6 @@ Null: There will be not be any difference in the number of strikes called when t
 
 We scraped every pitch of every game of the 2013, 2014, and 2015 MLB seasons from [Baseball-Reference.com](https://www.baseball-reference.com).
 
-![Partial Play by Play table of a game on Baseball-Reference.com](https://github.com/AshleyMcGee/MLB/blob/master/images/game_scrape_play-by-play.PNG)
-*Partial Play by Play table. We turned this...*
-
 We created code to retrieve from each game, based on the structure of each game's Play by Play table:
 * Home plate umpire name
 * Pitch sequence
@@ -25,9 +22,6 @@ We created code to retrieve from each game, based on the structure of each game'
 * Inning of each plate appearance
 * Score of the game during each plate appearance
 
-![Partial dataframe of scraped game during data cleaning](https://github.com/AshleyMcGee/MLB/blob/master/images/game_scrape_dataframe.PNG)
-*...into this (during cleaning process)...*
-
 Once we scraped this data from Baseball-Reference, we transformed it to:
 * Show the count of balls and strikes before each pitch
 * Have only one row for each pitch
@@ -35,7 +29,7 @@ Once we scraped this data from Baseball-Reference, we transformed it to:
 
 With each relevant pitch on its own row, we then added the race of each pitcher and umpire included in the 2013-15 game data. We compiled this data by starting with an Excel file of an MLB "player census" done by [BestTickets.com](www.besttickets.com/blog/mlb-players-census/). This Excel file only included players on each team's Opening Day roster for the 2014 season, so we then manually identified any pitchers not in the initial player census using a Google Image Search. Fortunately, the BestTickets file classified players into four groups: white, black, Hispanic, or Asian. These groups matched those used in the Parsons et al. study. For umpires, we again used a Google Image Search to determine each umpire's race (sorted into the same four categories as players). For pitchers and umpires whose race was not immediately obvious to the initial evaluator after a search, other group members were asked to provide a second opinion.  Batter data helped separate each plate appearance (and therefore helped determine the ball-strike count for each pitch), but it was dropped once it was no longer needed.
 
-When we finally had race data for all pitchers and umpires, we merged it with the game data. From there, we were able to convert the data into dummy variables that were classified into the following columns:
+When we finally had race data for all pitchers and umpires, we merged it with the game data. From there, we were able to one-hot encode the data into the necessary columns:
 * `strike_given_called`: Whether the pitch was called a strike
 * `upm`: Whether the umpire and pitcher race matched for that pitch
 * `home_pitcher`: Whether the pitcher was pitching for the home team
@@ -43,10 +37,57 @@ When we finally had race data for all pitchers and umpires, we merged it with th
 * `count_b-s`: Where `b` is the number of balls in the count and `s` is the number of strikes in the count.
 * `inning_i`: Where `i` is the inning in which the pitch was thrown. If a pitch was thrown in extra innings, it was placed in the `inning_9` column.
 
-At this point, the data was ready to be tested in models.
+At this point, the data was ready to be explored and put in tested in models.
 
-![Partial dataframe of scraped game during data cleaning](https://github.com/AshleyMcGee/MLB/blob/master/images/game_scrape_dummy-variables.PNG)
-*...and finally, into this.*
+## Data Exploration
+
+#### Count of total strike and balls called
+
+![UPM p-value vs number of features](https://github.com/AshleyMcGee/MLB/blob/master/images/strike_given_called.png)
+
+* The ratio of strike vs. ball calls is **33:67**.
+
+#### Count of pitches by pitcher race
+
+![UPM p-value vs number of features](https://github.com/AshleyMcGee/MLB/blob/master/images/pitcher_race.png)
+
+#### Count of pitches by umpire race
+
+![UPM p-value vs number of features](https://github.com/AshleyMcGee/MLB/blob/master/images/umpire_race.png)
+
+#### Count of piches where the umpire and pitcher are the same race
+
+![UPM p-value vs number of features](https://github.com/AshleyMcGee/MLB/blob/master/images/ump_count.png)
+
+* The umpire and pitcher are more likely to be the same race than not.
+
+#### Mean grouped by call
+
+![UPM p-value vs number of features](https://github.com/AshleyMcGee/MLB/blob/master/images/mean_groupby_call.png)
+
+* The percentage of pitches thrown by the home team that are called strikes is higher than that of pitches thrown by the away team. Pitchers playing at home receive more strike calls.
+* The average run differential of pitches called strike is higher than that of pitches called ball. Pitches called strike are more likely to be thrown by the team in the lead.
+
+#### Mean grouped by the umpire and pitcher of the same race
+
+![UPM p-value vs number of features](https://github.com/AshleyMcGee/MLB/blob/master/images/mean_groupby_upm.png)
+
+* The percentage of strike calls is slightly higher when the umpire are the same race.
+* Home pitchers are slightly more likely to have an umpire of a different race.
+* The average run differential of pitches called by an umpire of the same race is higher than that of pitches called by an umpire of a different race. On average, the team whose current pitcher is the same race as the umpire is more likely to be in the lead.
+
+#### Mean grouped by the pitch thrown by a pitcher at home
+
+![UPM p-value vs number of features](https://github.com/AshleyMcGee/MLB/blob/master/images/mean_groupby_home.png)
+
+* Home pitchers are more likely to receive strike calls.
+* Home pitchers are more likely to be on the team behind. This is affected by the fact that the home team always pitches in the top of the inning; the away team has had more at-bats than the home team.
+
+#### Race vs strike calls
+
+![UPM p-value vs number of features](https://github.com/AshleyMcGee/MLB/blob/master/images/proportion_calls.png)
+
+* Whether the umpire and pitcher are the same race does not seem like a strong predictor for called strikes based on the visualization.
 
 ## Our Analysis
 
@@ -57,9 +98,9 @@ Balancing our data caused a notable decrease in the accuracy of our model, so we
 
 The coefficient of UPM and the p-value changes as features were added to the model in order of rank-importance. The below graphs illustrate that the UPM coefficients increase and the p-values decrease as features are added, This shows that the effect of UPM, in some of cases, subtle though it may be, is significant as we control for other variables.
 
-![UPM Significance vs Number of Features for Overall Data](https://github.com/AshleyMcGee/MLB/blob/master/images/p_vs_nf_overall.png)
+![UPM p-value vs number of features](https://github.com/AshleyMcGee/MLB/blob/master/images/pval_vs_nfeatures_all.png)
 
-![UPM Coefficient vs Number of Features Overall](https://github.com/AshleyMcGee/MLB/blob/master/images/upm_vs_nf_overall.png)
+![UPM coefficient vs number of features](https://github.com/AshleyMcGee/MLB/blob/master/images/upm_vs_nfeatures_all.png)
 
 ## Results
 
@@ -67,15 +108,7 @@ Overall, we were unable to reject the null hypothesis when looking at the whole 
 
 However, we did find a significant difference in whether or not strikes were called when the umpire and pitcher are both black. In that case, the umpire is 1.4% less likely to call a strike (p = 0.049).
 
-![UPM Significance vs Number of Features when Umpire is Black](https://github.com/AshleyMcGee/MLB/blob/master/images/p_vs_nf_black_umpire.png)
-
-![UPM Coefficient vs Number of Features when Umpure is Black](https://github.com/AshleyMcGee/MLB/blob/master/images/upm_vs_nf_black_umpire.png)
-
 It is interesting to note that when the umpire and pitcher are both non-white, the umpire is 0.5% less likely to call a strike (p = 0.088).
-
-![UPM Significance vs Number of Features when Umpire is Non-white](https://github.com/AshleyMcGee/MLB/blob/master/images/p_vs_nf_nonwhite_umpire.png)
-
-![UPM Coefficient vs Number of Features when Umpure is Non-white](https://github.com/AshleyMcGee/MLB/blob/master/images/upm_vs_nf_nonwhite_umpire.png)
 
 ## Conclusions
 
