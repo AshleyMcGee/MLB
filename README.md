@@ -2,6 +2,14 @@
 
 We started with review of research done by Christopher A. Parsons, Johan Sulaeman, Michael C. Yates, and Daniel S. Hamermesh on potential racial bias exhibited by umpires in Major League Baseball in 2004-2006. In short, their research stated that when the race of the umpire matched the race of the starting pitcher, the umpire was more likely to call a strike. Additionally, this particular effect was only seen in stadiums where there was no electronic review of the calls made by umpires. In 2004-2006, approximately 35% of games had electronic monitoring of calls.
 
+## Our Hypothesis
+
+Based on a granular study of the subjective racial identity of umpires and starting pitchers in Major League Baseball during the 2013 through the 2015 seasons, we decided to re-attempt to examine conscious and/or subconscious bias of umpires where their race matched that of the starting pitcher for the purposes of corroborating or unsubstantiating the findings from Dr. Daniel Hamermesch et all. Our hypothesis states:
+
+There will be a difference in the number strikes called when the race of the home plate umpire matches the race of the pitcher.
+
+Null: There will be not be any difference in the number of strikes called when the race of the home plate umpire matches the race of the pitcher.
+
 ## Our Data
 
 We scraped every pitch of every game of the 2013, 2014, and 2015 MLB seasons from [Baseball-Reference.com](https://www.baseball-reference.com).
@@ -31,21 +39,14 @@ When we finally had race data for all pitchers and umpires, we merged it with th
 
 At this point, the data was ready to be tested in models.
 
-## Our Hypothesis
-
-There will be a difference in the number strikes called when the race of the home plate umpire matches the race of he pitcher.
-
-Null: There will be not be any difference in the number of strikes called when the race of the home plate umpire matches the race of the pitch.
-
 ## Our Analysis
 
-Logistic Regression was performed to evaluate the potential effects of umpire and pitcher race on the whether or not there were called balls or strikes.
+Logistic Regression was performed to evaluate the potential effects of umpire and pitcher race on whether or not an umpire would be prone to calling a ball or a strike.
 
-After some testing with the model, we found that the significance of UPM is most prominent when all of the features are in.
+After some testing with the model, we found that the significance of UPM (Umpire Pitcher Match) is most prominent when all of the features are applied.
+Balancing our data caused a notable decrease in the accuracy of our model, so we used feature selection to rank the importance of the features in the model without normalizing or resizing them first.
 
-Balancing our data caused a notable decrease in the accuracy of our model. So we used feature selection to rank the importance of the features in the model without normalizing or resizing them first.
-
-The coefficient of UPM and the p-value changes as you add features to the model in order of rank-importance. The below graphs illustrate that the UPM coefficients increase and the p-values decrease as features are added, This shows that the effect of UPM, in some of cases, subtle though it may be, is significant as we control for other variables.
+The coefficient of UPM and the p-value changes as features were added to the model in order of rank-importance. The below graphs illustrate that the UPM coefficients increase and the p-values decrease as features are added, This shows that the effect of UPM, in some of cases, subtle though it may be, is significant as we control for other variables.
 
 ![UPM p-value vs number of features](https://github.com/AshleyMcGee/MLB/blob/master/images/pval_vs_nfeatures_all.png)
 
@@ -53,10 +54,16 @@ The coefficient of UPM and the p-value changes as you add features to the model 
 
 ## Results
 
-Overall, we were unable to reject the null hypothesis, meaning that we cannot say that called strikes made by umpires is impacted by the race of the umpire or the pitcher.
+Overall, we were unable to reject the null hypothesis when looking at the whole of the data. Meaning, there is no significant difference in the frequency of called strikes when the race of the home plate umpire and the pitcher are the same (p = 0.239). 
 
-However, when using fixed effects when the umpire was black there was a p value of .049, suggesting....
+However, we did find a significant difference in whether or not strikes were called when the umpire and pitcher are both black. In that case, the umpire is 1.4% less likely to call a strike (p = 0.049).
 
-Furthermore, when using fixed effects where the umpire was 'non-white' (black or hispanic) there was a p value of .088. And when using fixed effects where the pitcher was 'non-white' (asian, black, or hispanic) there was a p value of .063. While this does not fall under the more desirable 95% confidence it does fall under 90% confidence and is an interesting finding.
+It is interesting to note that when the umpire and pitcher are both non-white, the umpire is 0.5% less likely to call a strike (p = 0.088).
 
 ## Conclusions
+
+When considering the overall data, we showed similar results to the results put forth by Dr. Daniel S. Hamermesh et all. They also did not discover a significant difference in the frequency of called strikes when the race of the umpire and pitcher matched, though they had a lower p-value (p = 0.12).
+
+However, we found opposing results to the original research when looking at black and non-whilte matches between umpire and pitcher. Their results showed that when umpire and pitcher matched in race, they were more likely to call a strike, whereas we found black and non-white umpire/pitcher matches to be less likely to call a strike.
+
+Overall, these results are not surprising. There were some marked differences between their analysis and ours that could account for those differences. We performed a logistic regression whereas they used a linear regression model. Also, we used a different data set ranging from 2013-2015 rather than 2004-2006. Changes in racial diversity, game rules and regulations--including the electronic monitoring of all games and calls--and any number of unknown factors that we were not able to control for, could have had an impact on the differences in our findings.
