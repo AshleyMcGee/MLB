@@ -14,6 +14,9 @@ Null: There will be not be any difference in the number of strikes called when t
 
 We scraped every pitch of every game of the 2013, 2014, and 2015 MLB seasons from [Baseball-Reference.com](https://www.baseball-reference.com).
 
+![Partial Play by Play table of a game on Baseball-Reference.com](https://github.com/AshleyMcGee/MLB/blob/master/images/game_scrape_play-by-play.PNG)
+*Partial Play by Play table. We turned this...*
+
 We created code to retrieve from each game, based on the structure of each game's Play by Play table:
 * Home plate umpire name
 * Pitch sequence
@@ -22,6 +25,9 @@ We created code to retrieve from each game, based on the structure of each game'
 * Inning of each plate appearance
 * Score of the game during each plate appearance
 
+![Partial dataframe of scraped game during data cleaning](https://github.com/AshleyMcGee/MLB/blob/master/images/game_scrape_dataframe.PNG)
+*...into this (during cleaning process)...*
+
 Once we scraped this data from Baseball-Reference, we transformed it to:
 * Show the count of balls and strikes before each pitch
 * Have only one row for each pitch
@@ -29,7 +35,7 @@ Once we scraped this data from Baseball-Reference, we transformed it to:
 
 With each relevant pitch on its own row, we then added the race of each pitcher and umpire included in the 2013-15 game data. We compiled this data by starting with an Excel file of an MLB "player census" done by [BestTickets.com](www.besttickets.com/blog/mlb-players-census/). This Excel file only included players on each team's Opening Day roster for the 2014 season, so we then manually identified any pitchers not in the initial player census using a Google Image Search. Fortunately, the BestTickets file classified players into four groups: white, black, Hispanic, or Asian. These groups matched those used in the Parsons et al. study. For umpires, we again used a Google Image Search to determine each umpire's race (sorted into the same four categories as players). For pitchers and umpires whose race was not immediately obvious to the initial evaluator after a search, other group members were asked to provide a second opinion.  Batter data helped separate each plate appearance (and therefore helped determine the ball-strike count for each pitch), but it was dropped once it was no longer needed.
 
-When we finally had race data for all pitchers and umpires, we merged it with the game data. From there, we were able to one-hot encode the data into the necessary columns:
+When we finally had race data for all pitchers and umpires, we merged it with the game data. From there, we were able to convert the data into dummy variables that were classified into the following columns:
 * `strike_given_called`: Whether the pitch was called a strike
 * `upm`: Whether the umpire and pitcher race matched for that pitch
 * `home_pitcher`: Whether the pitcher was pitching for the home team
@@ -38,6 +44,9 @@ When we finally had race data for all pitchers and umpires, we merged it with th
 * `inning_i`: Where `i` is the inning in which the pitch was thrown. If a pitch was thrown in extra innings, it was placed in the `inning_9` column.
 
 At this point, the data was ready to be tested in models.
+
+![Partial dataframe of scraped game during data cleaning](https://github.com/AshleyMcGee/MLB/blob/master/images/game_scrape_dummy-variables.PNG)
+*...and finally, into this.*
 
 ## Our Analysis
 
