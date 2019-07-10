@@ -48,6 +48,58 @@ At this point, the data was ready to be tested in models.
 ![Partial dataframe of scraped game during data cleaning](https://github.com/AshleyMcGee/MLB/blob/master/images/game_scrape_dummy-variables.PNG)
 *...and finally, into this.*
 
+## Data Exploration
+
+#### Count of total strike and balls called
+
+![UPM p-value vs number of features](https://github.com/AshleyMcGee/MLB/blob/master/images/strike_count.png)
+
+* The ratio of strike vs. ball calls is **33:67**.
+
+#### Count of pitches by pitcher race
+
+![UPM p-value vs number of features](https://github.com/AshleyMcGee/MLB/blob/master/images/pitcher_race_count.png)
+
+#### Count of pitches by umpire race
+
+![UPM p-value vs number of features](https://github.com/AshleyMcGee/MLB/blob/master/images/umpire_race_count.png)
+
+#### Count of piches where the umpire and pitcher are the same race
+
+![UPM p-value vs number of features](https://github.com/AshleyMcGee/MLB/blob/master/images/ump_count.png)
+
+* The umpire and pitcher are more likely to be the same race than not.
+* There are significantly less non-white pitchers and umpires than white one.
+* There are a handful of asian pitchers but no asian umpires.
+
+#### Mean grouped by call
+
+![UPM p-value vs number of features](https://github.com/AshleyMcGee/MLB/blob/master/images/mean_groupby_call.png)
+
+* The percentage of pitches thrown by the home team that are called strikes is higher than that of pitches thrown by the away team. Pitchers playing at home receive more strike calls.
+* The average run differential of pitches called strike is higher than that of pitches called ball. Pitches called strike are more likely to be thrown by the team in the lead.
+
+#### Mean grouped by the umpire and pitcher of the same race
+
+![UPM p-value vs number of features](https://github.com/AshleyMcGee/MLB/blob/master/images/mean_groupby_upm.png)
+
+* The percentage of strike calls is slightly higher when the umpire are the same race.
+* Home pitchers are slightly more likely to have an umpire of a different race.
+* The average run differential of pitches called by an umpire of the same race is higher than that of pitches called by an umpire of a different race. On average, the team whose current pitcher is the same race as the umpire is more likely to be in the lead.
+
+#### Mean grouped by the pitch thrown by a pitcher at home
+
+![UPM p-value vs number of features](https://github.com/AshleyMcGee/MLB/blob/master/images/mean_groupby_home.png)
+
+* Home pitchers are more likely to receive strike calls.
+* Home pitchers are more likely to be on the team behind. This is affected by the fact that the home team always pitches in the top of the inning; the away team has had more at-bats than the home team.
+
+#### Race vs strike calls
+
+![UPM p-value vs number of features](https://github.com/AshleyMcGee/MLB/blob/master/images/proportion_calls.png)
+
+* Whether the umpire and pitcher are the same race does not seem like a strong predictor for called strikes based on the visualization.
+
 ## Our Analysis
 
 Logistic Regression was performed to evaluate the potential effects of umpire and pitcher race on whether or not an umpire would be prone to calling a ball or a strike.
