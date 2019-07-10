@@ -4,33 +4,32 @@ We started with review of research done by Christopher A. Parsons, Johan Sulaema
 
 ## Our Data
 
-We pulled game data for 2013-2015 from https://www.baseball-reference.com
+We scraped every pitch of every game of the 2013, 2014, and 2015 MLB seasons from [Baseball-Reference.com](https://www.baseball-reference.com).
 
-We identified the urls for each game id
-* Loop through each game to pull:
-	- The home plate umpire name
-	- The pitch sequence
-	- The pitch count of balls and strike
-	- The pitcher name
-	- The batter name
-	- Boolean of whether or not the pitcher is the home pitcher
-	- The inning
-	- The run difference
+We created code to retrieve from each game, based on the structure of each game's Play by Play table:
+* Home plate umpire name
+* Pitch sequence
+* Pitcher name for each plate appearance
+* Batter name for each plate appearance
+* Inning of each plate appearance
+* Score of the game during each plate appearance
 
-Once we scraped the data from Baseball-Reference, we transformed it to include
-* The pitch count of balls and strikes after each pitch
-* Created a row for each pitch
-* Dropped rows whose pitches were not solely dependent on the home plate umpire's discretion -- that is, we kept only rows with called strikes and called balls (not intentional balls, pitchouts, etc.). These rows corresponded with pitch code C (called strike) or B (called ball).
+Once we scraped this data from Baseball-Reference, we transformed it to:
+* Show the count of balls and strikes before each pitch
+* Have only one row for each pitch
+* Drop rows whose pitches were not solely dependent on the home plate umpire's discretion -- that is, we kept only rows with called strikes and called balls (not intentional balls, pitchouts, etc.). These rows corresponded with pitch code C (called strike) or B (called ball).
 
-With each relevant pitch on its on row, we further cleaned the data:
-* 
+With each relevant pitch on its own row, we then added the race of each pitcher and umpire included in the 2013-15 game data. We compiled this data by starting with an Excel file of an MLB "player census" done by [BestTickets.com](www.besttickets.com/blog/mlb-players-census/). This Excel file only included players on each team's Opening Day roster for the 2014 season, so we then manually identified any pitchers not in the initial player census using a Google Image Search. Fortunately, the BestTickets file classified players into four groups: white, black, Hispanic, or Asian. These groups matched those used in the Parsons et al. study. For umpires, we again used a Google Image Search to determine each umpire's race (sorted into the same four categories as players). For pitchers and umpires whose race was not immediately obvious to the initial evaluator after a search, other group members were asked to provide a second opinion.  Batter data helped separate each plate appearance (and therefore helped determine the ball-strike count for each pitch), but it was dropped once it was no longer needed.
 
-We pulled 2014 player (pitcher) racial data from https://www.besttickets.com/blog/mlb-players-census/
+When we finally had race data for all pitchers and umpires, we merged it with the game data. From there, we were able to one-hot encode the data into the necessary columns:
+* `strike_given_called`: Whether the pitch was called a strike
+* `upm`: Whether the umpire and pitcher race matched for that pitch
+* `home_pitcher`: Whether the pitcher was pitching for the home team
+* `run_diff`: The run difference for the pitcher's team at that point in the game; for example, if the pitcher's team led by 5 runs, this was 5, and if the team trailed by 4 runs, this was -4. If the game was tied, this was 0.
+* `count_b-s`: Where `b` is the number of balls in the count and `s` is the number of strikes in the count.
+* `inning_i`: Where `i` is the inning in which the pitch was thrown. If a pitch was thrown in extra innings, it was placed in the `inning_9` column.
 
-We identified any other pitchers from 2013, 2014, & 2015 who were not in 2014 census data and manually identified their race (based on google image search). For pitchers whose race was unclear to the initial evaluator, another group member was asked to evaluate.
-*Races used: asian, black, hispanic, white
-
-We Identified home plate umpires race from 2013, 2014, & 2015 manually using google image search. For umpires whose race was unclear to the initial evaluator, another group member was asked to evaluate.
+At this point, the data was ready to be tested in models.
 
 ## Our Hypothesis
 
