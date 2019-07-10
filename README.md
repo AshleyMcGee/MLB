@@ -48,9 +48,9 @@ Balancing our data caused a notable decrease in the accuracy of our model. So we
 
 The coefficient of UPM and the p-value changes as you add features to the model in order of rank-importance. The below graphs illustrate that the UPM coefficients increase and the p-values decrease as features are added, This shows that the effect of UPM, in some of cases, subtle though it may be, is significant as we control for other variables.
 
-![UPM p-value vs number of features](images/pval_vs_nfeatures_all)
+![UPM p-value vs number of features](https://github.com/AshleyMcGee/MLB/blob/master/images/pval_vs_nfeatures_all.png)
 
-![UPM coefficient vs number of features](images/upm_vs_nfeatures_all)
+![UPM coefficient vs number of features](https://github.com/AshleyMcGee/MLB/blob/master/images/upm_vs_nfeatures_all.png)
 
 ## Results
 
