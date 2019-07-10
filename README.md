@@ -40,7 +40,17 @@ Null: There will be not be any difference in the number of strikes called when t
 
 ## Our Analysis
 
-Logistic Regression was performed to evaluate the potential effects of umpire and pitcher race on the whether or not there were called 'balls' or 'strikes'.
+Logistic Regression was performed to evaluate the potential effects of umpire and pitcher race on the whether or not there were called balls or strikes.
+
+After some testing with the model, we found that the significance of UPM is most prominent when all of the features are in.
+
+Balancing our data caused a notable decrease in the accuracy of our model. So we used feature selection to rank the importance of the features in the model without normalizing or resizing them first.
+
+The coefficient of UPM and the p-value changes as you add features to the model in order of rank-importance. The below graphs illustrate that the UPM coefficients increase and the p-values decrease as features are added, This shows that the effect of UPM, in some of cases, subtle though it may be, is significant as we control for other variables.
+
+![UPM p-value vs number of features](images/pval_vs_nfeatures_all)
+
+![UPM coefficient vs number of features](images/upm_vs_nfeatures_all)
 
 ## Results
 
