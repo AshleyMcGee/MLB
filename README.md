@@ -67,7 +67,15 @@ Overall, we were unable to reject the null hypothesis when looking at the whole 
 
 However, we did find a significant difference in whether or not strikes were called when the umpire and pitcher are both black. In that case, the umpire is 1.4% less likely to call a strike (p = 0.049).
 
+![UPM Significance vs Number of Features when Umpire is Black](https://github.com/AshleyMcGee/MLB/blob/master/images/p_vs_nf_black_umpire.png)
+
+![UPM Coefficient vs Number of Features when Umpure is Black](https://github.com/AshleyMcGee/MLB/blob/master/images/upm_vs_nf_black_umpire.png)
+
 It is interesting to note that when the umpire and pitcher are both non-white, the umpire is 0.5% less likely to call a strike (p = 0.088).
+
+![UPM Significance vs Number of Features when Umpire is Non-white](https://github.com/AshleyMcGee/MLB/blob/master/images/p_vs_nf_nonwhite_umpire.png)
+
+![UPM Coefficient vs Number of Features when Umpure is Non-white](https://github.com/AshleyMcGee/MLB/blob/master/images/upm_vs_nf_nonwhite_umpire.png)
 
 ## Conclusions
 
