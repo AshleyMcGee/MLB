@@ -17,6 +17,14 @@ We identified the urls for each game id
 	- The inning
 	- The run difference
 
+Once we scraped the data from Baseball-Reference, we transformed it to include
+* The pitch count of balls and strikes after each pitch
+* Created a row for each pitch
+* Dropped rows whose pitches were not solely dependent on the home plate umpire's discretion -- that is, we kept only rows with called strikes and called balls (not intentional balls, pitchouts, etc.). These rows corresponded with pitch code C (called strike) or B (called ball).
+
+With each relevant pitch on its on row, we further cleaned the data:
+* 
+
 We pulled 2014 player (pitcher) racial data from https://www.besttickets.com/blog/mlb-players-census/
 
 We identified any other pitchers from 2013, 2014, & 2015 who were not in 2014 census data and manually identified their race (based on google image search). For pitchers whose race was unclear to the initial evaluator, another group member was asked to evaluate.
