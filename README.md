@@ -65,9 +65,9 @@ At this point, the data was ready to be tested in models.
 
 ![Count of pitches by umpire race](https://github.com/AshleyMcGee/MLB/blob/master/images/umpire_race_count.png)
 
-#### Count of piches where the umpire and pitcher are the same race
+#### Count of pitches where the umpire and pitcher are the same race
 
-![Count of piches where the umpire and pitcher are the same race](https://github.com/AshleyMcGee/MLB/blob/master/images/ump_count.png)
+![Count of pitches where the umpire and pitcher are the same race](https://github.com/AshleyMcGee/MLB/blob/master/images/ump_count.png)
 
 * The umpire and pitcher are more likely to be the same race than not.
 * There are significantly fewer non-white pitchers and umpires than white ones.
