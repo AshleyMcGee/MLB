@@ -1,21 +1,21 @@
-# Examining Potential Umpire Bias in Major League Baseball
+# Call 'Em as They See 'Em: Examining Potential Umpire Bias in Major League Baseball
 
-We started with review of research done by Christopher A. Parsons, Johan Sulaeman, Michael C. Yates, and Daniel S. Hamermesh on potential racial bias exhibited by umpires in Major League Baseball in 2004-2006. In short, their research stated that when the race of the umpire matched the race of the starting pitcher, the umpire was more likely to call a strike. Additionally, this particular effect was only seen in stadiums where there was no electronic review of the calls made by umpires. In 2004-2006, approximately 35% of games had electronic monitoring of calls.
+Our inpsiration for this project came from a review of [research done by Christopher A. Parsons, Johan Sulaeman, Michael C. Yates, and Daniel S. Hamermesh](https://www.nber.org/papers/w13665.pdf) on potential racial bias exhibited by umpires in Major League Baseball in the 2004 to 2006 seasons. In short, their research stated that when the race of the umpire matched the race of the starting pitcher, the umpire was more likely to call a strike. Additionally, they found this particular effect was only seen when there was "little scrutiny of umpires' behavior" -- that is, for example, in stadiums where there was no computerized system monitoring calls. In 2004-2006, such systems were installed in just 11 of 30 MLB stadiums, which accounted for approximately 35 percent of games played in those seasons.
 
-## Our Hypothesis
+## Hypothesis
 
-Based on a granular study of the subjective racial identity of umpires and starting pitchers in Major League Baseball during the 2013 through the 2015 seasons, we decided to re-attempt to examine conscious and/or subconscious bias of umpires where their race matched that of the starting pitcher for the purposes of corroborating or unsubstantiating the findings from Dr. Daniel Hamermesch et all. Our hypothesis states:
+Based on a granular study of the subjective racial identity of umpires and pitchers in Major League Baseball during the 2013 to 2015 seasons, we decided to examine umpires' potential bias in an attempt to corroborate or oppose the findings of Parsons et al. Our hypothesis states:
 
-There will be a difference in the number strikes called when the race of the home plate umpire matches the race of the pitcher.
+There will be a positive difference in the number of strikes called when the race of the home plate umpire matches the race of the pitcher.
 
 Null: There will be not be any difference in the number of strikes called when the race of the home plate umpire matches the race of the pitcher.
 
-## Our Data
+## Data Retrieval and Cleaning
 
 We scraped every pitch of every game of the 2013, 2014, and 2015 MLB seasons from [Baseball-Reference.com](https://www.baseball-reference.com).
 
-![Partial Play by Play table of a game on Baseball-Reference.com](https://github.com/AshleyMcGee/MLB/blob/master/images/game_scrape_play-by-play.PNG)
-*Partial Play by Play table. We turned this...*
+![Partial play-by-play table of a game on Baseball-Reference.com](https://github.com/AshleyMcGee/MLB/blob/master/images/game_scrape_play-by-play.PNG)
+*Partial play-by-play table. We turned this...*
 
 We created code to retrieve from each game, based on the structure of each game's Play by Play table:
 * Home plate umpire name
@@ -33,7 +33,7 @@ Once we scraped this data from Baseball-Reference, we transformed it to:
 * Have only one row for each pitch
 * Drop rows whose pitches were not solely dependent on the home plate umpire's discretion -- that is, we kept only rows with called strikes and called balls (not intentional balls, pitchouts, etc.). These rows corresponded with pitch code C (called strike) or B (called ball).
 
-With each relevant pitch on its own row, we then added the race of each pitcher and umpire included in the 2013-15 game data. We compiled this data by starting with an Excel file of an MLB "player census" done by [BestTickets.com](www.besttickets.com/blog/mlb-players-census/). This Excel file only included players on each team's Opening Day roster for the 2014 season, so we then manually identified any pitchers not in the initial player census using a Google Image Search. Fortunately, the BestTickets file classified players into four groups: white, black, Hispanic, or Asian. These groups matched those used in the Parsons et al. study. For umpires, we again used a Google Image Search to determine each umpire's race (sorted into the same four categories as players). For pitchers and umpires whose race was not immediately obvious to the initial evaluator after a search, other group members were asked to provide a second opinion.  Batter data helped separate each plate appearance (and therefore helped determine the ball-strike count for each pitch), but it was dropped once it was no longer needed.
+With each relevant pitch on its own row, we then added the race of each pitcher and umpire included in the 2013-15 game data. We compiled this data by starting with an Excel file of an MLB "player census" done by [BestTickets.com](www.besttickets.com/blog/mlb-players-census/). This Excel file only included players on each team's Opening Day roster for the 2014 season, so we then manually identified any pitchers not in the initial player census using a Google Image Search. Fortunately, the BestTickets file classified players into four groups: white, black, Hispanic, or Asian. These groups matched those used in the Parsons et al. study. For umpires, we again used a Google Image Search to determine each umpire's race (sorted into the same four categories as players). For pitchers and umpires whose race was not immediately obvious to the initial evaluator after a search, other group members were asked to provide a second opinion. Batter data helped separate each plate appearance (and therefore helped determine the ball-strike count for each pitch), but it was dropped once it was no longer needed.
 
 When we finally had race data for all pitchers and umpires, we merged it with the game data. From there, we were able to convert the data into dummy variables that were classified into the following columns:
 * `strike_given_called`: Whether the pitch was called a strike
@@ -45,94 +45,95 @@ When we finally had race data for all pitchers and umpires, we merged it with th
 
 At this point, the data was ready to be tested in models.
 
-![Partial dataframe of scraped game during data cleaning](https://github.com/AshleyMcGee/MLB/blob/master/images/game_scrape_dummy-variables.PNG)
+![Partial dataframe of dummy variables after data cleaning completed](https://github.com/AshleyMcGee/MLB/blob/master/images/game_scrape_dummy-variables.PNG)
 *...and finally, into this.*
 
 ## Data Exploration
 
-#### Count of total strike and balls called
+#### Count of total balls and strikes called
 
-![UPM p-value vs number of features](https://github.com/AshleyMcGee/MLB/blob/master/images/strike_count.png)
+![Count of total balls and strikes called](https://github.com/AshleyMcGee/MLB/blob/master/images/strike_count.png)
 
-* The ratio of strike vs. ball calls is **33:67**.
+* The ratio of ball vs. strike calls is **67:33**.
 
 #### Count of pitches by pitcher race
 
-![UPM p-value vs number of features](https://github.com/AshleyMcGee/MLB/blob/master/images/pitcher_race_count.png)
+![Count of pitches by pitcher race](https://github.com/AshleyMcGee/MLB/blob/master/images/pitcher_race_count.png)
 
 #### Count of pitches by umpire race
 
-![UPM p-value vs number of features](https://github.com/AshleyMcGee/MLB/blob/master/images/umpire_race_count.png)
+![Count of pitches by umpire race](https://github.com/AshleyMcGee/MLB/blob/master/images/umpire_race_count.png)
 
 #### Count of piches where the umpire and pitcher are the same race
 
-![UPM p-value vs number of features](https://github.com/AshleyMcGee/MLB/blob/master/images/ump_count.png)
+![Count of piches where the umpire and pitcher are the same race](https://github.com/AshleyMcGee/MLB/blob/master/images/ump_count.png)
 
 * The umpire and pitcher are more likely to be the same race than not.
-* There are significantly less non-white pitchers and umpires than white one.
-* There are a handful of asian pitchers but no asian umpires.
+* There are significantly fewer non-white pitchers and umpires than white ones.
+* There are a handful of Asian pitchers but no Asian umpires.
 
 #### Mean grouped by call
 
-![UPM p-value vs number of features](https://github.com/AshleyMcGee/MLB/blob/master/images/mean_groupby_call.png)
+![Mean grouped by call](https://github.com/AshleyMcGee/MLB/blob/master/images/mean_groupby_call.png)
 
 * The percentage of pitches thrown by the home team that are called strikes is higher than that of pitches thrown by the away team. Pitchers playing at home receive more strike calls.
-* The average run differential of pitches called strike is higher than that of pitches called ball. Pitches called strike are more likely to be thrown by the team in the lead.
+* The average run difference of pitches called strikes is higher than that of pitches called balls. Pitches called strikes are more likely to be thrown by the team in the lead.
 
 #### Mean grouped by the umpire and pitcher of the same race
 
-![UPM p-value vs number of features](https://github.com/AshleyMcGee/MLB/blob/master/images/mean_groupby_upm.png)
+![Mean grouped by the umpire and pitcher of the same race](https://github.com/AshleyMcGee/MLB/blob/master/images/mean_groupby_upm.png)
 
-* The percentage of strike calls is slightly higher when the umpire are the same race.
+* The percentage of strike calls is slightly higher when the umpire and pitcher are the same race.
 * Home pitchers are slightly more likely to have an umpire of a different race.
-* The average run differential of pitches called by an umpire of the same race is higher than that of pitches called by an umpire of a different race. On average, the team whose current pitcher is the same race as the umpire is more likely to be in the lead.
+* The average run difference of pitches called by an umpire of the same race is higher than that of pitches called by an umpire of a different race. On average, the team whose current pitcher is the same race as the umpire is more likely to be in the lead.
 
 #### Mean grouped by the pitch thrown by a pitcher at home
 
-![UPM p-value vs number of features](https://github.com/AshleyMcGee/MLB/blob/master/images/mean_groupby_home.png)
+![Mean grouped by the pitch thrown by a pitcher at home](https://github.com/AshleyMcGee/MLB/blob/master/images/mean_groupby_home.png)
 
 * Home pitchers are more likely to receive strike calls.
-* Home pitchers are more likely to be on the team behind. This is affected by the fact that the home team always pitches in the top of the inning; the away team has had more at-bats than the home team.
+* Home pitchers are more likely to be on the team not in the lead. This is possibly due to the fact that the home team always pitches in the top of the inning, including to start the game; the away team could have more plate appearances than the home team.
 
-#### Race vs strike calls
+#### Race vs. strike calls
 
-![UPM p-value vs number of features](https://github.com/AshleyMcGee/MLB/blob/master/images/proportion_calls.png)
+![Race vs. strike calls](https://github.com/AshleyMcGee/MLB/blob/master/images/proportion_calls.png)
 
 * Whether the umpire and pitcher are the same race does not seem like a strong predictor for called strikes based on the visualization.
 
-## Our Analysis
+## Analysis
 
-Logistic Regression was performed to evaluate the potential effects of umpire and pitcher race on whether or not an umpire would be prone to calling a ball or a strike.
+We applied a logistic regression model to evaluate the potential effects of umpire and pitcher race on whether an umpire would be more likely to call a ball or a strike.
 
-After some testing with the model, we found that the significance of UPM (Umpire Pitcher Match) is most prominent when all of the features are applied.
+After some testing with the model, we found that the significance of `upm` (umpire-pitcher match) is most prominent when all of the features (`upm`, `home_pitcher`, `run_diff`, `count_b-s`, and `inning_i`) are applied.
+
 Balancing our data caused a notable decrease in the accuracy of our model, so we used feature selection to rank the importance of the features in the model without normalizing or resizing them first.
 
-The coefficient of UPM and the p-value changes as features were added to the model in order of rank-importance. The below graphs illustrate that the UPM coefficients increase and the p-values decrease as features are added, This shows that the effect of UPM, in some of cases, subtle though it may be, is significant as we control for other variables.
+The coefficient of `upm` and the p-value changes as features were added to the model in order of rank importance. The below graphs illustrate that the `upm` coefficients increase and the p-values decrease as features are added. This shows that the effect of `upm`, in some cases, subtle though it may be, is significant as we control for other variables.
 
-![UPM Significance vs Number of Features for Overall Data](https://github.com/AshleyMcGee/MLB/blob/master/images/p_vs_nf_overall.png)
+![UPM Significance vs. Number of Features for Overall Data](https://github.com/AshleyMcGee/MLB/blob/master/images/p_vs_nf_overall.png)
 
-![UPM Coefficient vs Number of Features Overall](https://github.com/AshleyMcGee/MLB/blob/master/images/upm_vs_nf_overall.png)
+![UPM Coefficient vs. Number of Features Overall](https://github.com/AshleyMcGee/MLB/blob/master/images/upm_vs_nf_overall.png)
 
 ## Results
 
-Overall, we were unable to reject the null hypothesis when looking at the whole of the data. Meaning, there is no significant difference in the frequency of called strikes when the race of the home plate umpire and the pitcher are the same (p = 0.239). 
+Overall, we were unable to reject the null hypothesis when looking at all of the data. We found there is no significant difference in the frequency of called strikes when the race of the home plate umpire and the pitcher are the same (p = 0.239).
 
-However, we did find a significant difference in whether or not strikes were called when the umpire and pitcher are both black. In that case, the umpire is 1.4% less likely to call a strike (p = 0.049).
+We did, however, find a significant difference in whether strikes were called when the umpire and pitcher are both black. In that case, the umpire is 1.4 percent less likely to call a strike (p = 0.049).
 
-![UPM Significance vs Number of Features when Umpire is Black](https://github.com/AshleyMcGee/MLB/blob/master/images/p_vs_nf_black_umpire.png)
+![UPM Significance vs. Number of Features when Umpire is Black](https://github.com/AshleyMcGee/MLB/blob/master/images/p_vs_nf_black_umpire.png)
 
-![UPM Coefficient vs Number of Features when Umpure is Black](https://github.com/AshleyMcGee/MLB/blob/master/images/upm_vs_nf_black_umpire.png)
+![UPM Coefficient vs. Number of Features when Umpure is Black](https://github.com/AshleyMcGee/MLB/blob/master/images/upm_vs_nf_black_umpire.png)
 
-It is interesting to note that when the umpire and pitcher are both non-white, the umpire is 0.5% less likely to call a strike (p = 0.088).
+It is interesting to note that when the umpire and pitcher are both non-white, the umpire is 0.5 percent less likely to call a strike (p = 0.088).
 
-![UPM Significance vs Number of Features when Umpire is Non-white](https://github.com/AshleyMcGee/MLB/blob/master/images/p_vs_nf_nonwhite_umpire.png)
+![UPM Significance vs. Number of Features when Umpire is Non-white](https://github.com/AshleyMcGee/MLB/blob/master/images/p_vs_nf_nonwhite_umpire.png)
 
-![UPM Coefficient vs Number of Features when Umpure is Non-white](https://github.com/AshleyMcGee/MLB/blob/master/images/upm_vs_nf_nonwhite_umpire.png)
+![UPM Coefficient vs. Number of Features when Umpure is Non-white](https://github.com/AshleyMcGee/MLB/blob/master/images/upm_vs_nf_nonwhite_umpire.png)
 
 ## Conclusions
 
-When considering the overall data, we showed similar results to the results put forth by Dr. Daniel S. Hamermesh et all. They also did not discover a significant difference in the frequency of called strikes when the race of the umpire and pitcher matched, though they had a lower p-value (p = 0.12).
+When considering the overall data, we showed similar results to the results put forth by Parsons et al. They also did not discover a significant difference in the frequency of called strikes when the race of the umpire and pitcher matched, but, using linear-probability models, they had a lower p-value (p = 0.12).
 
-However, we found opposing results to the original research when looking at black and non-whilte matches between umpire and pitcher. Their results showed that when umpire and pitcher matched in race, they were more likely to call a strike, whereas we found black and non-white umpire/pitcher matches to be less likely to call a strike.
+But we found opposing results to the original research when looking at black and non-white matches between umpire and pitcher. Their results showed that when umpire and pitcher matched in race, umpires were more likely to call a strike, but we found black and non-white umpire/pitcher matches to be less likely to result in a called strike.
 
-Overall, these results are not surprising. There were some marked differences between their analysis and ours that could account for those differences. We performed a logistic regression whereas they used a linear regression model. Also, we used a different data set ranging from 2013-2015 rather than 2004-2006. Changes in racial diversity, game rules and regulations--including the electronic monitoring of all games and calls--and any number of unknown factors that we were not able to control for, could have had an impact on the differences in our findings.
+Overall, these results are not surprising. There were some marked differences between the Parsons et al. analysis and ours that could account for those differences. We performed a logistic regression whereas they used a linear regression model. Also, we used a different dataset covering different years (2013-2015 rather than 2004-2006). Changes in racial diversity, game rules, technology -- including electronic monitoring now in all stadiums of all games and calls -- and any number of unknown factors that we were not able to control for could have had an impact on the differences in our findings.
