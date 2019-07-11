@@ -1,12 +1,12 @@
-# Examining Potential Umpire Bias in Major League Baseball
+# Call 'Em as They See 'Em: Examining Potential Umpire Bias in Major League Baseball
 
-We started with review of research done by Christopher A. Parsons, Johan Sulaeman, Michael C. Yates, and Daniel S. Hamermesh on potential racial bias exhibited by umpires in Major League Baseball in 2004-2006. In short, their research stated that when the race of the umpire matched the race of the starting pitcher, the umpire was more likely to call a strike. Additionally, this particular effect was only seen in stadiums where there was no electronic review of the calls made by umpires. In 2004-2006, approximately 35% of games had electronic monitoring of calls.
+Our inpsiration for this project came from a review of [research done by Christopher A. Parsons, Johan Sulaeman, Michael C. Yates, and Daniel S. Hamermesh](https://www.nber.org/papers/w13665.pdf) on potential racial bias exhibited by umpires in Major League Baseball in the 2004 to 2006 seasons. In short, their research stated that when the race of the umpire matched the race of the starting pitcher, the umpire was more likely to call a strike. Additionally, they found this particular effect was only seen when there was "little scrutiny of umpires' behavior" -- that is, in stadiums where there was no computerized system monitoring calls, at poorly attended games, or when the called pitch did not determine the outcome of the at-bat. In 2004-2006, approximately 35% of games had electronic monitoring of calls.
 
 ## Our Hypothesis
 
-Based on a granular study of the subjective racial identity of umpires and starting pitchers in Major League Baseball during the 2013 through the 2015 seasons, we decided to re-attempt to examine conscious and/or subconscious bias of umpires where their race matched that of the starting pitcher for the purposes of corroborating or unsubstantiating the findings from Dr. Daniel Hamermesch et all. Our hypothesis states:
+Based on a granular study of the subjective racial identity of umpires and pitchers in Major League Baseball during the 2013 to 2015 seasons, we decided to examine umpires' potential bias in an attempt to corroborate or oppose the findings of Parsons et al. Our hypothesis states:
 
-There will be a difference in the number strikes called when the race of the home plate umpire matches the race of the pitcher.
+There will be a positive difference in the number of strikes called when the race of the home plate umpire matches the race of the pitcher.
 
 Null: There will be not be any difference in the number of strikes called when the race of the home plate umpire matches the race of the pitcher.
 
