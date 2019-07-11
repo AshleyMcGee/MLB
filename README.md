@@ -1,8 +1,8 @@
 # Call 'Em as They See 'Em: Examining Potential Umpire Bias in Major League Baseball
 
-Our inpsiration for this project came from a review of [research done by Christopher A. Parsons, Johan Sulaeman, Michael C. Yates, and Daniel S. Hamermesh](https://www.nber.org/papers/w13665.pdf) on potential racial bias exhibited by umpires in Major League Baseball in the 2004 to 2006 seasons. In short, their research stated that when the race of the umpire matched the race of the starting pitcher, the umpire was more likely to call a strike. Additionally, they found this particular effect was only seen when there was "little scrutiny of umpires' behavior" -- that is, in stadiums where there was no computerized system monitoring calls, at poorly attended games, or when the called pitch did not determine the outcome of the plate appearance. In 2004-2006, approximately 35% of games had electronic monitoring of calls.
+Our inpsiration for this project came from a review of [research done by Christopher A. Parsons, Johan Sulaeman, Michael C. Yates, and Daniel S. Hamermesh](https://www.nber.org/papers/w13665.pdf) on potential racial bias exhibited by umpires in Major League Baseball in the 2004 to 2006 seasons. In short, their research stated that when the race of the umpire matched the race of the starting pitcher, the umpire was more likely to call a strike. Additionally, they found this particular effect was only seen when there was "little scrutiny of umpires' behavior" -- that is, for example, in stadiums where there was no computerized system monitoring calls. In 2004-2006, such systems were installed in just 11 of 30 MLB stadiums, which accounted for approximately 35 percent of games played in those seasons.
 
-## Our Hypothesis
+## Hypothesis
 
 Based on a granular study of the subjective racial identity of umpires and pitchers in Major League Baseball during the 2013 to 2015 seasons, we decided to examine umpires' potential bias in an attempt to corroborate or oppose the findings of Parsons et al. Our hypothesis states:
 
@@ -10,7 +10,7 @@ There will be a positive difference in the number of strikes called when the rac
 
 Null: There will be not be any difference in the number of strikes called when the race of the home plate umpire matches the race of the pitcher.
 
-## Our Data
+## Data Retrieval and Cleaning
 
 We scraped every pitch of every game of the 2013, 2014, and 2015 MLB seasons from [Baseball-Reference.com](https://www.baseball-reference.com).
 
@@ -100,39 +100,40 @@ At this point, the data was ready to be tested in models.
 
 * Whether the umpire and pitcher are the same race does not seem like a strong predictor for called strikes based on the visualization.
 
-## Our Analysis
+## Analysis
 
-Logistic Regression was performed to evaluate the potential effects of umpire and pitcher race on whether or not an umpire would be prone to calling a ball or a strike.
+We applied a logistic regression model to evaluate the potential effects of umpire and pitcher race on whether an umpire would be more likely to call a ball or a strike.
 
-After some testing with the model, we found that the significance of UPM (Umpire Pitcher Match) is most prominent when all of the features are applied.
+After some testing with the model, we found that the significance of `upm` (umpire-pitcher match) is most prominent when all of the features (`upm`, `home_pitcher`, `run_diff`, `count_b-s`, and `inning_i`) are applied.
+
 Balancing our data caused a notable decrease in the accuracy of our model, so we used feature selection to rank the importance of the features in the model without normalizing or resizing them first.
 
-The coefficient of UPM and the p-value changes as features were added to the model in order of rank-importance. The below graphs illustrate that the UPM coefficients increase and the p-values decrease as features are added, This shows that the effect of UPM, in some of cases, subtle though it may be, is significant as we control for other variables.
+The coefficient of `upm` and the p-value changes as features were added to the model in order of rank importance. The below graphs illustrate that the `upm` coefficients increase and the p-values decrease as features are added. This shows that the effect of `upm`, in some cases, subtle though it may be, is significant as we control for other variables.
 
-![UPM Significance vs Number of Features for Overall Data](https://github.com/AshleyMcGee/MLB/blob/master/images/p_vs_nf_overall.png)
+![UPM Significance vs. Number of Features for Overall Data](https://github.com/AshleyMcGee/MLB/blob/master/images/p_vs_nf_overall.png)
 
-![UPM Coefficient vs Number of Features Overall](https://github.com/AshleyMcGee/MLB/blob/master/images/upm_vs_nf_overall.png)
+![UPM Coefficient vs. Number of Features Overall](https://github.com/AshleyMcGee/MLB/blob/master/images/upm_vs_nf_overall.png)
 
 ## Results
 
-Overall, we were unable to reject the null hypothesis when looking at the whole of the data. Meaning, there is no significant difference in the frequency of called strikes when the race of the home plate umpire and the pitcher are the same (p = 0.239). 
+Overall, we were unable to reject the null hypothesis when looking at all of the data. We found there is no significant difference in the frequency of called strikes when the race of the home plate umpire and the pitcher are the same (p = 0.239).
 
-However, we did find a significant difference in whether or not strikes were called when the umpire and pitcher are both black. In that case, the umpire is 1.4% less likely to call a strike (p = 0.049).
+We did, however, find a significant difference in whether strikes were called when the umpire and pitcher are both black. In that case, the umpire is 1.4 percent less likely to call a strike (p = 0.049).
 
-![UPM Significance vs Number of Features when Umpire is Black](https://github.com/AshleyMcGee/MLB/blob/master/images/p_vs_nf_black_umpire.png)
+![UPM Significance vs. Number of Features when Umpire is Black](https://github.com/AshleyMcGee/MLB/blob/master/images/p_vs_nf_black_umpire.png)
 
-![UPM Coefficient vs Number of Features when Umpure is Black](https://github.com/AshleyMcGee/MLB/blob/master/images/upm_vs_nf_black_umpire.png)
+![UPM Coefficient vs. Number of Features when Umpure is Black](https://github.com/AshleyMcGee/MLB/blob/master/images/upm_vs_nf_black_umpire.png)
 
-It is interesting to note that when the umpire and pitcher are both non-white, the umpire is 0.5% less likely to call a strike (p = 0.088).
+It is interesting to note that when the umpire and pitcher are both non-white, the umpire is 0.5 percent less likely to call a strike (p = 0.088).
 
-![UPM Significance vs Number of Features when Umpire is Non-white](https://github.com/AshleyMcGee/MLB/blob/master/images/p_vs_nf_nonwhite_umpire.png)
+![UPM Significance vs. Number of Features when Umpire is Non-white](https://github.com/AshleyMcGee/MLB/blob/master/images/p_vs_nf_nonwhite_umpire.png)
 
-![UPM Coefficient vs Number of Features when Umpure is Non-white](https://github.com/AshleyMcGee/MLB/blob/master/images/upm_vs_nf_nonwhite_umpire.png)
+![UPM Coefficient vs. Number of Features when Umpure is Non-white](https://github.com/AshleyMcGee/MLB/blob/master/images/upm_vs_nf_nonwhite_umpire.png)
 
 ## Conclusions
 
-When considering the overall data, we showed similar results to the results put forth by Dr. Daniel S. Hamermesh et all. They also did not discover a significant difference in the frequency of called strikes when the race of the umpire and pitcher matched, though they had a lower p-value (p = 0.12).
+When considering the overall data, we showed similar results to the results put forth by Parsons et al. They also did not discover a significant difference in the frequency of called strikes when the race of the umpire and pitcher matched, but, using linear-probability models, they had a lower p-value (p = 0.12).
 
-However, we found opposing results to the original research when looking at black and non-whilte matches between umpire and pitcher. Their results showed that when umpire and pitcher matched in race, they were more likely to call a strike, whereas we found black and non-white umpire/pitcher matches to be less likely to call a strike.
+But we found opposing results to the original research when looking at black and non-white matches between umpire and pitcher. Their results showed that when umpire and pitcher matched in race, umpires were more likely to call a strike, but we found black and non-white umpire/pitcher matches to be less likely to result in a called strike.
 
-Overall, these results are not surprising. There were some marked differences between their analysis and ours that could account for those differences. We performed a logistic regression whereas they used a linear regression model. Also, we used a different data set ranging from 2013-2015 rather than 2004-2006. Changes in racial diversity, game rules and regulations--including the electronic monitoring of all games and calls--and any number of unknown factors that we were not able to control for, could have had an impact on the differences in our findings.
+Overall, these results are not surprising. There were some marked differences between the Parsons et al. analysis and ours that could account for those differences. We performed a logistic regression whereas they used a linear regression model. Also, we used a different dataset covering different years (2013-2015 rather than 2004-2006). Changes in racial diversity, game rules, technology -- including electronic monitoring now in all stadiums of all games and calls -- and any number of unknown factors that we were not able to control for could have had an impact on the differences in our findings.
