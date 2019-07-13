@@ -1,7 +1,7 @@
 # Call 'Em as They See 'Em: Examining Potential Umpire Bias in Major League Baseball
 ### Marshall Doig, Stephanie Engeling, Willy Goal, Robert McAlmon, Ashley McGee
 
-Our inpsiration for this project came from a review of [research done by Christopher A. Parsons, Johan Sulaeman, Michael C. Yates, and Daniel S. Hamermesh](https://www.nber.org/papers/w13665.pdf) on potential racial bias exhibited by umpires in Major League Baseball in the 2004 to 2006 seasons. In short, their research stated that when the race of the umpire matched the race of the starting pitcher, the umpire was more likely to call a strike. Additionally, they found this particular effect was only seen when there was "little scrutiny of umpires' behavior" -- that is, for example, in stadiums where there was no computerized system monitoring calls. In 2004-2006, such systems were installed in just 11 of 30 MLB stadiums, which accounted for approximately 35 percent of games played in those seasons.
+Our inspiration for this project came from [research done by Christopher A. Parsons, Johan Sulaeman, Michael C. Yates, and Daniel S. Hamermesh](https://www.nber.org/papers/w13665.pdf) on potential racial bias exhibited by umpires in Major League Baseball in the 2004 to 2006 seasons. In short, their research stated that when the race of the umpire matched the race of the starting pitcher, the umpire was more likely to call a strike. Additionally, they found this particular effect was only seen when there was "little scrutiny of umpires' behavior" -- that is, for example, in stadiums where there was no computerized system monitoring calls. In 2004-2006, such systems were installed in just 11 of 30 MLB stadiums, which accounted for approximately 35 percent of games played in those seasons.
 
 ## Hypothesis
 
@@ -50,6 +50,23 @@ At this point, the data was ready to be tested in models.
 *...and finally, into this.*
 
 ## Data Exploration
+
+#### Count of umpires by race
+
+| Umpire Race | Count |
+| ----------: | :---: |
+| White       | 88    |
+| Black       | 6     |
+| Hispanic    | 6     |
+
+#### Count of pitchers by race
+
+| Pitcher Race | Count |
+| -----------: | :---: |
+| White        | 905   |
+| Hispanic     | 302   |
+| Black        | 162   |
+| Asian        | 29    |
 
 #### Count of total balls and strikes called
 
