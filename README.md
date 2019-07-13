@@ -117,6 +117,14 @@ The coefficient of `upm` and the p-value changes as features were added to the m
 
 ## Results
 
+| Umpire Race | UPM Coefficient | UPM Effect | p-value |
+| ----------: | :-------------: | :--------: | :-----: |
+| Black       | -0.0675         | -1.43%     | 0.049   |
+| Nonwhite    | -0.0237         | -0.50%     | 0.088   |
+| All         | 0.0051          | +0.11%     | 0.239   |
+| White       | 0.0053          | +0.11%     | 0.275   |
+| Hispanic    | -0.0042         | -0.09%     | 0.860   |
+
 Overall, we were unable to reject the null hypothesis when looking at all of the data. We found there is no significant difference in the frequency of called strikes when the race of the home plate umpire and the pitcher are the same (p = 0.239).
 
 We did, however, find a significant difference in whether strikes were called when the umpire and pitcher are both black. In that case, the umpire is 1.4 percent less likely to call a strike (p = 0.049).
