@@ -1,15 +1,27 @@
 # Call 'Em as They See 'Em: Examining Potential Umpire Bias in Major League Baseball
 ### Marshall Doig, Stephanie Engeling, Willy Goal, Robert McAlmon, Ashley McGee
 
-Our inspiration for this project came from [research done by Christopher A. Parsons, Johan Sulaeman, Michael C. Yates, and Daniel S. Hamermesh](https://www.nber.org/papers/w13665.pdf) on potential racial bias exhibited by umpires in Major League Baseball in the 2004 to 2006 seasons. In short, their research stated that when the race of the umpire matched the race of the starting pitcher, the umpire was more likely to call a strike. Additionally, they found this particular effect was only seen when there was "little scrutiny of umpires' behavior" -- that is, for example, in stadiums where there was no computerized system monitoring calls. In 2004-2006, such systems were installed in just 11 of 30 MLB stadiums, which accounted for approximately 35 percent of games played in those seasons.
+Our inspiration for this project came from [research done by Christopher A. Parsons, Johan Sulaeman, Michael C. Yates, and Daniel S. Hamermesh](https://www.nber.org/papers/w13665.pdf) on potential racial bias exhibited by umpires in Major League Baseball in the 2004 to 2006 seasons. In short, their research stated that when the race of the umpire matched the race of the starting pitcher, the umpire was more likely to call a strike. However, they found this particular effect was only seen when there was "little scrutiny of umpires' behavior" -- that is, for example, in stadiums where there was no computerized system monitoring calls. In 2004-2006, such systems were installed in just 11 of 30 MLB stadiums, which accounted for approximately 35 percent of games played in those seasons.
+
+We took inspiration from their methods to examine potential racial bias by umpires in the 2013 to 2015 seasons. Although we failed to find any significant effects overall, we did find that in a couple special cases, there is a subtle but notable effect on the probability that an umpire calls a strike based on whether or not he matches the pitcher on race.
 
 ## Hypothesis
 
-Based on a granular study of the subjective racial identity of umpires and pitchers in Major League Baseball during the 2013 to 2015 seasons, we decided to examine umpires' potential bias in an attempt to corroborate or oppose the findings of Parsons et al. Our hypothesis states:
+Based on a study of the subjective racial identity of umpires and pitchers in Major League Baseball during the 2013 to 2015 seasons, we decided to examine umpires' potential bias in an attempt to corroborate or oppose the findings of Parsons et al. Our hypothesis states:
 
-There will be a positive difference in the number of strikes called when the race of the home plate umpire matches the race of the pitcher.
+* H<sub>1</sub>: The probability that an umpire calls a strike on a called pitch is significantly effected by whether or not the umpire and pitcher match on race.
 
-Null: There will be not be any difference in the number of strikes called when the race of the home plate umpire matches the race of the pitcher.
+The null hypothesis, then, is:
+
+* H<sub>0</sub>: The probability that an umpire calls a strike on a called pitch is not significantly effected by whether or not the umpire and pitcher match on race.
+
+We tested this hypothesis in several forms to cover several cases:
+1. We examined the overall effect of whether or not umpire and pitcher match on race.
+2. We examined the effect of whether or not umpire and pitcher match on race, when the umpire's race is fixed. This resulted in three cases:
+    1. When the umpire is white
+    2. When the umpire is black
+    3. When the umpire is hispanic
+3. We lumped the racial categories into a binary: white vs. nonwhite; and we examined the effect of whether or not the umpire matches the pitcher on nonwhiteness.
 
 ## Data Retrieval and Cleaning
 
