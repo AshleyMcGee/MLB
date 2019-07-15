@@ -155,19 +155,19 @@ First, for each case we examined, we applied scikit-learn's recursive feature el
 ![UPM Coefficient vs. Number of Features Overall](https://github.com/AshleyMcGee/MLB/blob/master/images/upm_vs_nf_overall.png)
 
 #### Feature elimination effects when umpire is white
-![UPM p-value vs. Number of Features when Umpire is White](https://github.com/AshleyMcGee/MLB/blob/master/images/p_vs_white_umpire.png)
+![UPM p-value vs. Number of Features when Umpire is White](https://github.com/AshleyMcGee/MLB/blob/master/images/p_vs_nf_white_umpire.png)
 ![UPM Coefficient vs. Number of Features when Umpire is White](https://github.com/AshleyMcGee/MLB/blob/master/images/upm_vs_nf_white_umpire.png)
 
 #### Feature elimination effects when umpire is black
-![UPM p-value vs. Number of Features when Umpire is Black](https://github.com/AshleyMcGee/MLB/blob/master/images/p_vs_black_umpire.png)
+![UPM p-value vs. Number of Features when Umpire is Black](https://github.com/AshleyMcGee/MLB/blob/master/images/p_vs_nf_black_umpire.png)
 ![UPM Coefficient vs. Number of Features when Umpire is Black](https://github.com/AshleyMcGee/MLB/blob/master/images/upm_vs_nf_black_umpire.png)
 
 #### Feature elimination effects when umpire is hispanic
-![UPM p-value vs. Number of Features when Umpire is Hispanic](https://github.com/AshleyMcGee/MLB/blob/master/images/p_vs_hispanic_umpire.png)
+![UPM p-value vs. Number of Features when Umpire is Hispanic](https://github.com/AshleyMcGee/MLB/blob/master/images/p_vs_nf_hispanic_umpire.png)
 ![UPM Coefficient vs. Number of Features when Umpire is Hispanic](https://github.com/AshleyMcGee/MLB/blob/master/images/upm_vs_nf_hispanic_umpire.png)
 
 #### Feature elimination effects when umpire is nonwhite
-![UPM p-value vs. Number of Features when Umpire is Nonwhite](https://github.com/AshleyMcGee/MLB/blob/master/images/p_vs_nonwhite_umpire.png)
+![UPM p-value vs. Number of Features when Umpire is Nonwhite](https://github.com/AshleyMcGee/MLB/blob/master/images/p_vs_nf_nonwhite_umpire.png)
 ![UPM Coefficient vs. Number of Features when Umpire is Nonwhite](https://github.com/AshleyMcGee/MLB/blob/master/images/upm_vs_nf_nonwhite_umpire.png)
 
 ## Results
