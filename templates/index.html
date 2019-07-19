@@ -13,10 +13,10 @@
     <h4 class="section-subheaders text-center"><em>Our Inspiration For The Project</em></h4>
     <hr>
     <div class="row">
-        <div class="col-6">
-          <img id="intro-left" src="{{ url_for('static', filename='img/paper.jpg') }}">
+        <div class="col">
+          <img class="img-fluid" id="intro-left" src="{{ url_for('static', filename='img/paper.jpg') }}">
         </div>
-        <div class="col-6">
+        <div class="col">
           <div id="intro-right">
           <p>
             Our inspiration for this project came from research done by Christopher A. Parsons, Johan Sulaeman, Michael C. Yates, and Daniel S. Hamermesh on potential racial bias exhibited by umpires in Major League Baseball in the 2004 to 2006 seasons. In short, their research stated that when the race of the umpire matched the race of the starting pitcher, the umpire was more likely to call a strike. However, they found this particular effect was only seen when there was "little scrutiny of umpires' behavior" -- that is, for example, in stadiums where there was no computerized system monitoring calls. In 2004-2006, such systems were installed in just 11 of 30 MLB stadiums, which accounted for approximately 35 percent of games played in those seasons.
@@ -78,7 +78,7 @@
           <p>
             We scraped every pitch of every game of the 2013, 2014, and 2015 MLB seasons from <a href="Baseball-Reference.com">Baseball-Reference.com</a>
           </p>
-          <img id="pbp" src="{{ url_for('static', filename='img/game_scrape_play-by-play.png') }}">
+          <img class="img-fluid" id="pbp" src="{{ url_for('static', filename='img/game_scrape_play-by-play.png') }}">
           <p>
             We created code to retrieve from each game, based on the structure of each game's Play by Play table:
           </p>
@@ -90,7 +90,7 @@
             <li>Inning of each plate appearance</li>
             <li>Score of the game during each plate appearance</li>
           </ul>
-          <img id="pitch-df" src="{{ url_for('static', filename='img/game_scrape_dataframe.png') }}">
+          <img class="img-fluid" id="pitch-df" src="{{ url_for('static', filename='img/game_scrape_dataframe.png') }}">
           <p>
             Once we scraped this data from Baseball-Reference, we transformed it to:
           </p>
@@ -115,7 +115,7 @@
           <p>
             At this point, the data was ready to be tested in models.
           </p>
-          <img id="df-for-models" src="{{ url_for('static', filename='img/game_scrape_dummy-variables.png') }}">
+          <img class="img-fluid" id="df-for-models" src="{{ url_for('static', filename='img/game_scrape_dummy-variables.png') }}">
           <h3 class="secondary-subheadings">Exploration</h3>
           <p>
             Before we jump into the analysis, here are some brief facts about our data set. Readers eager to see the results may jump ahead to the next two sections.
@@ -127,7 +127,7 @@
 
           <div class="col-sm-4">
             <div class="card" style="width: 18rem;">
-              <img class="card-img-top" src="{{ url_for('static', filename='img/strike_count.png') }}">
+              <img class="card-img-top img-fluid" src="{{ url_for('static', filename='img/strike_count.png') }}">
               <div class="card-body">
                 <p class="card-text">The ratio of ball vs. strike calls is <strong>67:33</strong>.</p>
               </div>
@@ -136,7 +136,7 @@
 
           <div class="col-sm-4">
           <div class="card" style="width: 18rem;">
-            <img class="card-img-top" src="{{ url_for('static', filename='img/pitcher_race_count.png') }}">
+            <img class="card-img-top img-fluid" src="{{ url_for('static', filename='img/pitcher_race_count.png') }}">
             <div class="card-body">
               <p class="card-text">Count of pitches by pitcher race.</p>
             </div>
@@ -145,7 +145,7 @@
 
           <div clas="col-sm-4">
             <div class="card" style="width: 18rem;">
-              <img class="card-img-top" src="{{ url_for('static', filename='img/umpire_race_count.png') }}">
+              <img class="card-img-top img-fluid" src="{{ url_for('static', filename='img/umpire_race_count.png') }}">
               <div class="card-body">
                 <p class="card-text">Count of pitches by umpire race</p>
               </div>
@@ -154,7 +154,7 @@
 
           <div class="col-sm-4">
           <div class="card" style="width: 18rem;">
-            <img class="card-img-top" src="{{ url_for('static', filename='img/ump_count.png') }}">
+            <img class="card-img-top img-fluid" src="{{ url_for('static', filename='img/ump_count.png') }}">
             <div class="card-body">
               <ul class="card-text">
                 <li>The umpire and pitcher are more likely to be the same race than not.</li>
@@ -167,7 +167,7 @@
 
           <div class="col-sm-4">
           <div class="card" style="width: 18rem;">
-            <img class="card-img-top" src="{{ url_for('static', filename='img/proportion_calls.png') }}">
+            <img class="card-img-top img-fluid" src="{{ url_for('static', filename='img/proportion_calls.png') }}">
             <div class="card-body">
               <p class="card-text">Whether the umpire and pitcher are the same race does not seem like a strong predictor for called strikes based on the visualization.</p>
             </div>
@@ -187,15 +187,15 @@
     <p>
     We applied a logistic regression model to evaluate the potential effects of umpire and pitcher race on whether an umpire would be more likely to call a ball or a strike. That is, we modeled the probability of an umpire calling a strike on a called pitch (π-hat) in terms of an indicator variable <em>x</em><sub>upm</sub> which equals 1 if <strong>u</strong>mpire and <strong>p</strong>itcher <strong>m</strong>atch on a racial category (UPM), 0 otherwsie, and in terms of of a vector of control variables <em>x</em><sub>controls</sub> described in the section on data cleaning:
     </p>
-    <img id="logit-regression" src="{{ url_for('static', filename='img/logit_model.png') }}">
+    <img class="img-fluid" id="logit-regression" src="{{ url_for('static', filename='img/logit_model.png') }}">
     <p>
       Since the coefficients of a logistic model cannot be interpreted directly, we quantified the effects of UPM on the the probability by taking the partial derivative of the probabiity estimator with respect to the indicator variable...
     </p>
-    <img id="formula-for-partial" src="{{ url_for('static', filename='img/formula_for_partial.png') }}">
+    <img class="img-fluid" id="formula-for-partial" src="{{ url_for('static', filename='img/formula_for_partial.png') }}">
     <p>
         ...and evaluating it where the indicator variable is set at baseline, and all control variables are set at their means:
     </p>
-    <img id="effects-quantified" src="{{ url_for('static', filename='img/effects_quantified.png') }}">
+    <img class="img-fluid" id="effects-quantified" src="{{ url_for('static', filename='img/effects_quantified.png') }}">
     <p>
       After some testing with the model, we found that the significance of <code>upm</code> (umpire-pitcher match) is most prominent when all of the features (<code>upm</code>, <code>home_pitcher</code>, <code>run_diff</code>, <code>count_b-s</code>, and <code>inning_i</code>) are applied. This was an interesting find that seemed to indicate that our model was indeed picking up on a significant, if subtle, effect in certain cases, and that the control variables were serving a purpose by helping to filter out noise that would prevent the <code>upm</code> feature from expressing itself fully.
     </p>
@@ -280,7 +280,7 @@
 
       <div class="col">
         <div class="card" style="width: 18rem;">
-          <img class="card-img-top" src="{{ url_for('static', filename='img/upm_vs_nf_overall.png') }}">
+          <img class="card-img-top img-fluid" src="{{ url_for('static', filename='img/upm_vs_nf_overall.png') }}">
           <div class="card-body">
             <p class="card-text">
               UPM coefficient with feature elimination effects overall
@@ -291,7 +291,7 @@
 
       <div class="col">
         <div class="card" style="width: 18rem;">
-          <img class="card-img-top" src="{{ url_for('static', filename='img/p_vs_nf_overall.png') }}">
+          <img class="card-img-top img-fluid" src="{{ url_for('static', filename='img/p_vs_nf_overall.png') }}">
           <div class="card-body">
             <p class="card-text">
               UPM p-value with feature elimination effects overall
@@ -302,7 +302,7 @@
 
       <div class="col">
         <div class="card" style="width: 18rem;">
-          <img class="card-img-top" src="{{ url_for('static', filename='img/upm_vs_nf_white_umpire.png') }}">
+          <img class="card-img-top img-fluid" src="{{ url_for('static', filename='img/upm_vs_nf_white_umpire.png') }}">
           <div class="card-body">
             <p class="card-text">
               UPM coefficient with feature elimination effects when umpire is white
@@ -313,7 +313,7 @@
 
       <div class="col">
         <div class="card" style="width: 18rem;">
-          <img class="card-img-top" src="{{ url_for('static', filename='img/p_vs_nf_white_umpire.png') }}">
+          <img class="card-img-top img-fluid" src="{{ url_for('static', filename='img/p_vs_nf_white_umpire.png') }}">
           <div class="card-body">
             <p class="card-text">
               UPM p-value with feature elimination effects when umpire is white
@@ -324,7 +324,7 @@
 
       <div class="col">
         <div class="card" style="width: 18rem;">
-          <img class="card-img-top" src="{{ url_for('static', filename='img/upm_vs_nf_black_umpire.png') }}">
+          <img class="card-img-top img-fluid" src="{{ url_for('static', filename='img/upm_vs_nf_black_umpire.png') }}">
           <div class="card-body">
             <p class="card-text">
               UPM coefficient with feature elimination effects when umpire is black
@@ -335,7 +335,7 @@
 
       <div class="col">
         <div class="card" style="width: 18rem;">
-          <img class="card-img-top" src="{{ url_for('static', filename='img/p_vs_nf_black_umpire.png') }}">
+          <img class="card-img-top img-fluid" src="{{ url_for('static', filename='img/p_vs_nf_black_umpire.png') }}">
           <div class="card-body">
             <p class="card-text">
               UPM p-value with feature elimination effects when umpire is black
@@ -346,7 +346,7 @@
 
       <div class="col">
         <div class="card" style="width: 18rem;">
-          <img class="card-img-top" src="{{ url_for('static', filename='img/upm_vs_nf_hispanic_umpire.png') }}">
+          <img class="card-img-top img-fluid" src="{{ url_for('static', filename='img/upm_vs_nf_hispanic_umpire.png') }}">
           <div class="card-body">
             <p class="card-text">
               UPM coefficent with feature elimination effects when umpire is hispanic
@@ -357,7 +357,7 @@
 
       <div class="col">
         <div class="card" style="width: 18rem;">
-          <img class="card-img-top" src="{{ url_for('static', filename='img/p_vs_nf_hispanic_umpire.png') }}">
+          <img class="card-img-top img-fluid" src="{{ url_for('static', filename='img/p_vs_nf_hispanic_umpire.png') }}">
           <div class="card-body">
             <p class="card-text">
               UPM p-value with feature elimination effects when umpire is hispanic
@@ -368,7 +368,7 @@
 
       <div class="col">
         <div class="card" style="width: 18rem;">
-          <img class="card-img-top" src="{{ url_for('static', filename='img/upm_vs_nf_nonwhite_umpire.png') }}">
+          <img class="card-img-top img-fluid" src="{{ url_for('static', filename='img/upm_vs_nf_nonwhite_umpire.png') }}">
           <div class="card-body">
             <p class="card-text">
               UPM coefficient with feature elimination effects when umpire is nonwhite
@@ -379,7 +379,7 @@
 
       <div class="col">
         <div class="card" style="width: 18rem;">
-          <img class="card-img-top" src="{{ url_for('static', filename='img/p_vs_nf_nonwhite_umpire.png') }}">
+          <img class="card-img-top img-fluid" src="{{ url_for('static', filename='img/p_vs_nf_nonwhite_umpire.png') }}">
           <div class="card-body">
             <p class="card-text">
               UPM p-value with feature elimination effects when umpire is nonwhite
