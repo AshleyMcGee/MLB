@@ -1,0 +1,500 @@
+body {
+
+  font-family: 'Noto Sans', sans-serif;
+  font-size: 14px;
+
+}
+
+@font-face {
+  font-family: 'mlb_red_soxregular';
+  src: url('fonts/mlbrs___-webfont.woff2') format('woff2'),
+       url('fonts/mlbrs___-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+
+}
+
+.navbar-brand {
+
+    font-family: 'Oswald', sans-serif;
+    font-size: 20px;
+    margin-bottom: 0px;
+
+}
+
+nav.navbar.navbar-expand-lg.navbar-dark.fixed-top {
+
+  background: rgba(9,38,105,.5));
+  transition: background-color 200ms linear;
+
+}
+
+nav.navbar.navbar-expand-lg.navbar-dark.fixed-top span.navbar-text {
+
+  color: white;
+  font-family: 'Noto Sans', sans-serif;
+  font-size: 10px;
+  margin-top: 0px;
+
+}
+
+ul.navbar-nav {
+
+  padding-top: 5px;
+  font-family: 'Oswald', sans-serif;
+
+}
+
+.jumbotron.jumbotron-fluid {
+
+  background: linear-gradient(rgba(9,38,105,.8), rgba(249,1,44,.8)), url(img/hero-pitch.jpg);
+  background-position: center center;
+  background-size: cover;
+  margin-left:auto;
+  margin-right:auto;
+  height: 890px;
+  color: white;
+
+}
+
+.display-4 {
+
+  padding-top: 285px;
+
+}
+
+.display-4, .lead {
+
+  text-align: center;
+  font-family: 'mlb_red_soxregular';
+
+}
+
+.section-headers {
+
+  font-family: 'Noto Sans', sans-serif;
+  font-size: 22px;
+  color: rgb(109, 121, 179);
+  padding-top: 120px;
+
+}
+
+.section-subheaders {
+
+  font-family: 'Noto Sans', sans-serif;
+  font-size: 16px;
+  color: rgb(109, 121, 179);
+
+}
+
+.secondary-subheadings  {
+
+  padding-top: 40px;
+  padding-bottom: 20px;
+  font-size: 22px;
+  font-weight: bold;
+
+}
+
+.tertiary-subheadings {
+
+  padding-top: 40px;
+  padding-bottom: 20px;
+  font-size: 18px;
+  font-weight: bold;
+
+}
+
+.interior {
+
+  padding-top: 40px;
+  margin-left: auto;
+  margin-right: auto;
+
+}
+
+
+#intro-left {
+
+  display: block;
+  width: 619px;
+  height: 586px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#intro-right {
+
+  width: 400px;
+
+}
+
+
+#second-ordered {
+  list-style-type: lower-roman;
+
+}
+
+#pbp {
+
+  width: 867px;
+  height: 195px;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+  padding-top: 20px;
+  padding-bottom: 20px;
+
+}
+
+#pitch-df {
+
+  width: 631px;
+  height: 475px;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+  padding-top: 20px;
+  padding-bottom: 20px;
+
+}
+
+#df-for-models {
+
+  width: 885px;
+  height: 144px;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+  padding-top: 20px;
+  padding-bottom: 20px;
+
+}
+
+#logit-regression {
+
+  width: 568px;
+  height: 130px;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+  padding-top: 20px;
+  padding-bottom: 20px;
+
+}
+
+#formula-for-partial {
+
+  width: 283px;
+  height: 130px;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+  padding-top: 20px;
+  padding-bottom: 20px;
+
+}
+
+#effects-quantified {
+
+  width: 319px;
+  height: 130px;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+  padding-top: 20px;
+  padding-bottom: 20px;
+
+}
+
+#footer {
+
+  background-color: rgb(9,38,105);
+  margin-top: 40px;
+
+}
+
+#footer-interior {
+
+  padding-top: 20px;
+  padding-bottom: 20px;
+  width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+
+}
+
+footer p {
+
+  font-size: 12px;
+  color: white;
+  margin-bottom: 0px;
+
+}
+
+hr {
+
+  width: 50%;
+
+}
+
+
+
+
+@media (min-width: 1008px) {
+
+  body {
+
+    font-family: 'Noto Sans', sans-serif;
+
+  }
+
+  @font-face {
+    font-family: 'mlb_red_soxregular';
+    src: url('fonts/mlbrs___-webfont.woff2') format('woff2'),
+         url('fonts/mlbrs___-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+  }
+
+  .navbar-brand {
+
+      font-family: 'Oswald', sans-serif;
+      font-size: 20px;
+
+  }
+
+  nav.navbar.navbar-expand-lg.navbar-dark.fixed-top {
+
+    background: rgba(9,38,105,.5));
+    transition: background-color 200ms linear;
+  }
+
+  nav.navbar.navbar-expand-lg.navbar-dark.fixed-top span.navbar-text {
+
+    color: white;
+    font-family: 'Noto Sans', sans-serif;
+    font-size: 13px;
+
+  }
+
+  ul.navbar-nav {
+
+    padding-top: 5px;
+    font-family: 'Oswald', sans-serif;
+    margin-left: 350px;
+
+  }
+
+  span.navbar-text {
+
+    padding-top: 13px;
+
+  }
+
+  .jumbotron.jumbotron-fluid {
+
+    background: linear-gradient(rgba(9,38,105,.8), rgba(249,1,44,.8)), url(img/hero-pitch.jpg);
+    background-position: center center;
+    background-size: cover;
+    margin-left:auto;
+    margin-right:auto;
+    height: 890px;
+    color: white;
+
+  }
+
+  .display-4 {
+
+    padding-top: 285px;
+
+  }
+
+  .display-4, .lead {
+
+    text-align: center;
+    font-family: 'mlb_red_soxregular';
+
+  }
+
+  .section-headers {
+
+    font-family: 'Noto Sans', sans-serif;
+    font-size: 22px;
+    color: rgb(109, 121, 179);
+    padding-top: 100px;
+
+  }
+
+  .section-subheaders {
+
+    font-family: 'Noto Sans', sans-serif;
+    font-size: 16px;
+    color: rgb(109, 121, 179);
+
+  }
+
+  .secondary-subheadings  {
+
+    padding-top: 40px;
+    padding-bottom: 20px;
+    font-size: 22px;
+    font-weight: bold;
+
+  }
+
+  .tertiary-subheadings {
+
+    padding-top: 40px;
+    padding-bottom: 20px;
+    font-size: 18px;
+    font-weight: bold;
+
+  }
+
+  #footer {
+
+    background-color: rgb(9,38,105);
+    margin-top: 40px;
+
+  }
+
+  #footer-interior {
+
+    padding-top: 20px;
+    padding-bottom: 20px;
+    width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+
+  }
+
+  footer p {
+
+    font-size: 12px;
+    color: white;
+    margin-bottom: 0px;
+
+  }
+
+  hr {
+
+    width: 50%;
+
+  }
+
+  #intro-left {
+
+    display: block;
+    width: 619px;
+    height: 586px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  #intro-right {
+
+    padding-top: 70px;
+    width: 700px;
+
+  }
+
+  .interior {
+
+    padding-top: 40px;
+    width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+
+  }
+
+  #second-ordered {
+    list-style-type: lower-roman;
+
+  }
+
+  #pbp {
+
+    width: 867px;
+    height: 195px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    padding-top: 20px;
+    padding-bottom: 20px;
+
+  }
+
+  #pitch-df {
+
+    width: 631px;
+    height: 475px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    padding-top: 20px;
+    padding-bottom: 20px;
+
+  }
+
+  #df-for-models {
+
+    width: 885px;
+    height: 144px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    padding-top: 20px;
+    padding-bottom: 20px;
+
+  }
+
+  #logit-regression {
+
+    width: 568px;
+    height: 130px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    padding-top: 20px;
+    padding-bottom: 20px;
+
+  }
+
+  #formula-for-partial {
+
+    width: 283px;
+    height: 130px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    padding-top: 20px;
+    padding-bottom: 20px;
+
+  }
+
+  #effects-quantified {
+
+    width: 319px;
+    height: 130px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    padding-top: 20px;
+    padding-bottom: 20px;
+
+  }
+
+  #form {
+
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    padding-top: 20px;
+    padding-bottom: 20px;
+
+  }
+
+}
