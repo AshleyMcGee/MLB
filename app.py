@@ -1,8 +1,5 @@
 import os
 
-import pandas as pd
-import numpy as np
-
 from flask import (
     Flask,
     render_template,
@@ -10,8 +7,6 @@ from flask import (
     request,
     redirect,
     url_for)
-
-from baseball_utils import *
 
 app=Flask(__name__)
 
