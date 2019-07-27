@@ -1,6 +1,8 @@
 # Call 'Em as They See 'Em: Examining Potential Umpire Bias in Major League Baseball
 ### Marshall Doig, Stephanie Engeling, Willy Goal, Robert McAlmon, Ashley McGee
 
+Dashboard: https://ashleymcgee.github.io/mlb_live/
+
 Our inspiration for this project came from [research done by Christopher A. Parsons, Johan Sulaeman, Michael C. Yates, and Daniel S. Hamermesh](https://www.nber.org/papers/w13665.pdf) on potential racial bias exhibited by umpires in Major League Baseball in the 2004 to 2006 seasons. In short, their research stated that when the race of the umpire matched the race of the starting pitcher, the umpire was more likely to call a strike. However, they found this particular effect was only seen when there was "little scrutiny of umpires' behavior" -- that is, for example, in stadiums where there was no computerized system monitoring calls. In 2004-2006, such systems were installed in just 11 of 30 MLB stadiums, which accounted for approximately 35 percent of games played in those seasons.
 
 We took inspiration from their methods to examine potential racial bias by umpires in the 2013 to 2015 seasons. Although we failed to find any significant effects overall, we did find that in a couple special cases, there is a subtle but notable effect on the probability that an umpire calls a strike based on whether or not he matches the pitcher on race.
