@@ -14,7 +14,7 @@
     <hr>
     <div class="row">
         <div class="col">
-          <img class="img-fluid" id="intro-left" src="https://github.com/AshleyMcGee/MLB/blob/master/static/img/paper.jpg">
+          <img class="img-fluid" id="intro-left" src="{{ url_for('static', filename='img/paper.png') }}">
         </div>
         <div class="col">
           <div id="intro-right">
@@ -78,7 +78,7 @@
           <p>
             We scraped every pitch of every game of the 2013, 2014, and 2015 MLB seasons from <a href="Baseball-Reference.com">Baseball-Reference.com</a>
           </p>
-          <img class="img-fluid" id="pbp" src="https://github.com/AshleyMcGee/MLB/blob/master/static/img/game_scrape_play-by-play.png">
+          <img class="img-fluid" id="pbp" src="{{ url_for('static', filename='img/game_scrape_play-by-play.png') }}">
           <p>
             We created code to retrieve from each game, based on the structure of each game's Play by Play table:
           </p>
@@ -90,7 +90,7 @@
             <li>Inning of each plate appearance</li>
             <li>Score of the game during each plate appearance</li>
           </ul>
-          <img class="img-fluid" id="pitch-df" src="https://github.com/AshleyMcGee/MLB/blob/master/static/img/game_scrape_dataframe.png">
+          <img class="img-fluid" id="pitch-df" src="{{ url_for('static', filename='img/game_scrape_dataframe.png') }}">
           <p>
             Once we scraped this data from Baseball-Reference, we transformed it to:
           </p>
@@ -115,7 +115,7 @@
           <p>
             At this point, the data was ready to be tested in models.
           </p>
-          <img class="img-fluid" id="df-for-models" src="https://github.com/AshleyMcGee/MLB/blob/master/static/img/game_scrape_dummy-variables.png">
+          <img class="img-fluid" id="df-for-models" src="{{ url_for('static', filename='img/game_scrape_dummy-variables.png') }}">
           <h3 class="secondary-subheadings">Exploration</h3>
           <p>
             Before we jump into the analysis, here are some brief facts about our data set. Readers eager to see the results may jump ahead to the next two sections.
