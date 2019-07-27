@@ -121,6 +121,9 @@ def eliminate_features (X, y, ranked_features):
         p.append(fit.pvalues[0])
         print(f"Beta = {beta[-1]}; p = {p[-1]}")
 
+        # Remove least significant control from list
+        rf = rf[:-1]
+
     return n_features, beta, p
 
 
